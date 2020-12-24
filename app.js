@@ -2,7 +2,7 @@
  *TWO DIMENSIONAL ARRAYS
  *Verilen "notes" isimli arrayin her elemani bir array icerir ve bu array sirasiyla ögrenci adini, mathematik, 
  *almanca, ingilizce ve cografya ders notlarini icermektedir. Bu cok boyutlu array kullanilarak;
- *1.Sinifin her dersinin ortalamasi ayri ayri hesaplanacak,
+ *1.Her dersin sinif ortalamasi ayri ayri hesaplanacak,
  *2.Herhangi bir dersden 70 puan üstü alanlarin listesi bulunacak,
  *3.Tüm derslerden ortalamanin üstünde olanlarin listesi olusturulacak,
  *4.Sinifin hangi dersde en iyi nota sahip oldugu gosterilecek,
@@ -19,6 +19,11 @@ const notes = [
     ["Urs", 49, 45, 56, 67],
     ["Monika", 49, 42, 16, 62]
 ];
+const STUDENT_NAME = 0
+const MATH_INDEX = 1;
+const GERMAN_INDEX = 2;
+const ENGLISH_INDEX = 3;
+const GEO_INDEX = 4;
 /**
  * Verilen Ders Indexine Göre Not Ortalamasi Bulan Fonksiyon
  * @param {*} pLessonIndex 
@@ -48,7 +53,7 @@ function findOverBorderStudent(pNoteList, pLessonIndex, pBorderNote) {
     let passedStudentList = [];
     pNoteList.map(student => {
         if (student[pLessonIndex] > pBorderNote) {
-            passedStudentList.push(student[0] + " " + student[pLessonIndex]);
+            passedStudentList.push(student[STUDENT_NAME] + " " + student[pLessonIndex]);
         }
     })
     return passedStudentList;
@@ -72,7 +77,7 @@ function findOverAverageStudentList(pNoteList, pLessonIndex, pAverageNote) {
     let overAverageStudent = [];
     pNoteList.map(student => {
         if (student[pLessonIndex] > pAverageNote) {
-            overAverageStudent.push(student[0] + " " + student[pLessonIndex]);
+            overAverageStudent.push(student[STUDENT_NAME] + " " + student[pLessonIndex]);
         }
     })
     return overAverageStudent;
@@ -102,7 +107,7 @@ function findMaxNoteStudent(pNoteList, pLessonIndex) {
     })
     pNoteList.map(student => {
         if (student[pLessonIndex] === maxNote) {
-            maxNoteStudent.push(student[0] + " " + maxNote);
+            maxNoteStudent.push(student[STUDENT_NAME] + " " + maxNote);
         }
     })
     return maxNoteStudent;
@@ -135,14 +140,7 @@ function findMostSuccessfulLesson(pMathAverage, pGermanAverage, pEnglishAverage,
     } else if (mostSuccessfulNote === pGeoAverage) {
         mostSuccessfulLesson = "Cografya"
     }
-    return mostSuccessfulLesson
-}
-/**
- * Sinifin en basarili oldugu dersi konsola yazdiran fonksiyon
- * @param {*} pLessonName  
- */
-function renderMostSuccessfulLesson(pLessonName) {
-    console.log(`Sinifin en basarili oldugu ders ${pLessonName}`)
+    console.log(`Sinifin en basarili oldugu ders ${mostSuccessfulLesson}, not ortalamasi ${mostSuccessfulNote}`)
 }
 /**
  * Sinifin En Basarili Oldugu Dersi Bulan Fonksiyon
@@ -164,84 +162,76 @@ function findLessSuccessfulLesson(pMathAverage, pGermanAverage, pEnglishAverage,
     } else if (lessSuccessfulNote === pGeoAverage) {
         lessSuccessfulLesson = "Cografya"
     }
-    return lessSuccessfulLesson
-}
-/**
- * Sinifin en ez basarili oldugu dersi konsola yazdiran fonksiyon
- * @param {*} pLessonName 
- */
-function renderLessSuccessfulLesson(pLessonName) {
-    console.log(`Sinifin en basarisiz oldugu ders ${pLessonName}`)
+    console.log(`Sinifin en basarisiz oldugu ders ${lessSuccessfulLesson}, not ortalamasi ${lessSuccessfulNote} `)
+
 }
 
 //Matematik Not Ortalamasinin Bulunmasi ve Ekrana Yazdirilmasi
-let mathAverageNote = findAverageNote(1, notes);
+let mathAverageNote = findAverageNote(MATH_INDEX, notes);
 renderAveregeNote(mathAverageNote, "Matematik");
 
 //Almanca Not Ortalamasinin Bulunmasi ve Ekrana Yazdirilmasi
-let germanAverageNote = findAverageNote(2, notes);
+let germanAverageNote = findAverageNote(GERMAN_INDEX, notes);
 renderAveregeNote(germanAverageNote, "Almanca");
 
 //Ingilizce Not Ortalamasinin Bulunmasi ve Konsola Yazdirilmasi
-let englishAverageNote = findAverageNote(3, notes);
+let englishAverageNote = findAverageNote(ENGLISH_INDEX, notes);
 renderAveregeNote(englishAverageNote, "Ingilizce")
 
 //Cografya Not Ortalamasinin Bulunmasi ve Konsola Yazdirilmasi
-let geoAverageNote = findAverageNote(4, notes);
+let geoAverageNote = findAverageNote(GEO_INDEX, notes);
 renderAveregeNote(geoAverageNote, "Cografya");
 
 //Mathematik Dersinden 70 üzeri alan ögrencilerin listesi
-let mathPassedStudentList = findOverBorderStudent(notes, 1, 70);
+let mathPassedStudentList = findOverBorderStudent(notes, MATH_INDEX, 70);
 renderPassedStudents("Matematik", 70, mathPassedStudentList);
 
 //Almanca Dersinden 70 üzeri alan ögrencilerin listesi
-let germanPassedStudentList = findOverBorderStudent(notes, 2, 70);
+let germanPassedStudentList = findOverBorderStudent(notes, GERMAN_INDEX, 70);
 renderPassedStudents("Almanca", 70, germanPassedStudentList);
 
 //Ingilizce Dersinden 70 üzeri alan ögrencilerin listesi
-let englishPassedStudentList = findOverBorderStudent(notes, 3, 70);
+let englishPassedStudentList = findOverBorderStudent(notes, ENGLISH_INDEX, 70);
 renderPassedStudents("Ingilizce", 70, englishPassedStudentList);
 
 //Cografya Dersinden 70 üzeri alan ögrencilerin listesi
-let geoPassedStudentList = findOverBorderStudent(notes, 4, 70);
+let geoPassedStudentList = findOverBorderStudent(notes, GEO_INDEX, 70);
 renderPassedStudents("Cografya", 70, geoPassedStudentList);
 
 //Mathematik Dersinden Ortalamanin Üzerinde Not Alan Ögrencilerin Bulunmasi ve Konsola Yazdirilmasi
-let mathOverAverageStudentList = findOverAverageStudentList(notes, 1, mathAverageNote);
+let mathOverAverageStudentList = findOverAverageStudentList(notes, MATH_INDEX, mathAverageNote);
 renderOverAverageStudent(mathAverageNote, "Mathematik", mathOverAverageStudentList);
 
 //Almanca Dersinden Ortalamanin Üzerinde Not Alan Ögrencilerin Bulunmasi ve Konsola Yazdirilmasi
-let germanOverAverageStudentList = findOverAverageStudentList(notes, 2, germanAverageNote);
+let germanOverAverageStudentList = findOverAverageStudentList(notes, GERMAN_INDEX, germanAverageNote);
 renderOverAverageStudent(germanAverageNote, "Almanca", germanOverAverageStudentList);
 
 //Ingilizce Dersinden Ortalamanin Üzerinde Not Alan Ögrencilerin Bulunmasi ve Konsola Yazdirilmasi
-let englishOverAverageStudentList = findOverAverageStudentList(notes, 3, englishAverageNote);
+let englishOverAverageStudentList = findOverAverageStudentList(notes, ENGLISH_INDEX, englishAverageNote);
 renderOverAverageStudent(englishAverageNote, "Ingilizce", englishOverAverageStudentList);
 
 //Cografya Dersinden Ortalamanin Üzerinde Not Alan Ögrencilerin Bulunmasi ve Konsola Yazdirilmasi
-let geoOverAverageStudentList = findOverAverageStudentList(notes, 4, geoAverageNote);
+let geoOverAverageStudentList = findOverAverageStudentList(notes, GEO_INDEX, geoAverageNote);
 renderOverAverageStudent(geoAverageNote, "Cografya", geoOverAverageStudentList);
 
 //Mathematik Dersinden En Yüksek Notu Alan Ögrencinin Bulunmasi ve Konsola Yazdirilmasi
-let mathMaxNoteStudent = findMaxNoteStudent(notes, 1);
+let mathMaxNoteStudent = findMaxNoteStudent(notes, MATH_INDEX);
 renderMaxNoteStudent("Mathematik", mathMaxNoteStudent);
 
 //Almanca Dersinden En Yüksek Notu Alan Ögrencinin Bulunmasi ve Konsola Yazdirilmasi
-let germanMaxNoteStudent = findMaxNoteStudent(notes, 2);
+let germanMaxNoteStudent = findMaxNoteStudent(notes, GERMAN_INDEX);
 renderMaxNoteStudent("Almanca", germanMaxNoteStudent);
 
 //Ingilizce Dersinden En Yüksek Notu Alan Ögrencinin Bulunmasi ve Konsola Yazdirilmasi
-let englishMaxNoteStudent = findMaxNoteStudent(notes, 3);
+let englishMaxNoteStudent = findMaxNoteStudent(notes, ENGLISH_INDEX);
 renderMaxNoteStudent("Ingilizce", englishMaxNoteStudent);
 
 //Cografya Dersinden En Yüksek Notu Alan Ögrencinin Bulunmasi ve Konsola Yazdirilmasi
-let geoMaxNoteStudent = findMaxNoteStudent(notes, 4);
+let geoMaxNoteStudent = findMaxNoteStudent(notes, GEO_INDEX);
 renderMaxNoteStudent("Cografya", geoMaxNoteStudent);
 
 //Sinifin En Basarili Oldugu Dersin Bulunmasi ve Konsola Yazdirilmasi
-let mostSuccessfulLesson = findMostSuccessfulLesson(mathAverageNote, germanAverageNote, englishAverageNote, geoAverageNote);
-renderMostSuccessfulLesson(mostSuccessfulLesson)
+findMostSuccessfulLesson(mathAverageNote, germanAverageNote, englishAverageNote, geoAverageNote);
 
 //Sinifin En Az Basarili Oldugu Dersin Bulunmasi ve Konsola Yazdirilmasi
-let lessSuccessfulLesson = findLessSuccessfulLesson(mathAverageNote, germanAverageNote, englishAverageNote, geoAverageNote);
-renderLessSuccessfulLesson(lessSuccessfulLesson)
+findLessSuccessfulLesson(mathAverageNote, germanAverageNote, englishAverageNote, geoAverageNote);
