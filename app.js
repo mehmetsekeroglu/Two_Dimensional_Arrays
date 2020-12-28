@@ -143,7 +143,7 @@ function findMostSuccessfulLesson(pMathAverage, pGermanAverage, pEnglishAverage,
     console.log(`Sinifin en basarili oldugu ders ${mostSuccessfulLesson}, not ortalamasi ${mostSuccessfulNote}`)
 }
 /**
- * Sinifin En Basarili Oldugu Dersi Bulan Fonksiyon
+ * Sinifin En Az Basarili Oldugu Dersi Bulan Fonksiyon
  * @param {*} pMathAverage 
  * @param {*} pGermanAverage 
  * @param {*} pEnglishAverage 
