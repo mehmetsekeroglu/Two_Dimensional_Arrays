@@ -37,8 +37,8 @@ let cografyaOrtalama = ortalamaBul(notes, GEO_INDEX)
 
 /**
  * Basarili Ögrenci Bulan Fonksiyon
- * @param {*} pNotListesi 
- * @param {*} pDersIndex 
+ * @param {object} pNotListesi 
+ * @param {int} pDersIndex 
  */
 function basariliÖgrenciBul(pNotListesi, pDersIndex) {
     let basariliNot = [];
